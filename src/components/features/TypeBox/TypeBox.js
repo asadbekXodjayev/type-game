@@ -193,7 +193,7 @@ const TypeBox = ({
   const [prevInput, setPrevInput] = useState("");
 
   // set up words examine history
-  const [wordsCorrect, setWordsCorrect] = useState(new Set());
+  const [, setWordsCorrect] = useState(new Set());
   const [wordsInCorrect, setWordsInCorrect] = useState(new Set());
   const [inputWordsHistory, setInputWordsHistory] = useState({});
 

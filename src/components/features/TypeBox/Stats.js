@@ -15,6 +15,17 @@ import {
 } from "recharts";
 import { red } from "@mui/material/colors";
 
+// Stable reference (defined once at module scope) so it can be listed as an
+// effect dependency without re-running the effect on every render.
+const initialTypingTestHistory = [
+  {
+    wpm: 0,
+    rawWpm: 0,
+    time: 0,
+    error: 0,
+  },
+];
+
 const Stats = ({
   status,
   wpm,
@@ -38,15 +49,6 @@ const Stats = ({
   const roundedRawWpm = Math.round(
     (rawKeyStrokes / 5 / rawWpmElapsedSeconds) * 60.0
   );
-
-  const initialTypingTestHistory = [
-    {
-      wpm: 0,
-      rawWpm: 0,
-      time: 0,
-      error: 0,
-    },
-  ];
 
   const [typingTestHistory, setTypingTestHistory] = useState(
     initialTypingTestHistory
@@ -98,6 +100,10 @@ const Stats = ({
         setIncorrectCharsCount(0);
       }
     }
+    // Intentionally keyed to `countDown` only: this records exactly one chart
+    // sample per timer tick. Re-running when the WPM/error values it reads
+    // change would push duplicate/partial samples and skew the graph.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countDown]);
 
   const getFormattedLanguageLanguageName = (value) => {
