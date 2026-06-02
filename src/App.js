@@ -32,9 +32,6 @@ const DefaultKeyboard = lazy(() =>
 const WordsCard = lazy(() =>
   import("./components/features/WordsCard/WordsCard")
 );
-const MusicPlayerSnackbar = lazy(() =>
-  import("./components/features/MusicPlayer/MusicPlayerSnackbar")
-);
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -76,9 +73,6 @@ function App() {
   const [isFocusedMode, setIsFocusedMode] = useState(
     localStorage.getItem("focused-mode") === "true"
   );
-
-  // musicMode setting
-  const [isMusicMode, setIsMusicMode] = useState(false);
 
   // ultraZenMode setting
   const [isUltraZenMode, setIsUltraZenMode] = useState(
@@ -123,10 +117,6 @@ function App() {
 
   const toggleSoundMode = () => {
     setSoundMode(!soundMode);
-  };
-
-  const toggleMusicMode = () => {
-    setIsMusicMode(!isMusicMode);
   };
 
   const toggleUltraZenMode = () => {
@@ -191,7 +181,6 @@ function App() {
   }, [
     theme,
     isFocusedMode,
-    isMusicMode,
     isCoffeeMode,
     isWordGameMode,
     isSentenceGameMode,
@@ -205,7 +194,7 @@ function App() {
         <DynamicBackground theme={theme}></DynamicBackground>
         <div className="canvas">
           <GlobalStyles />
-          <Logo isFocusedMode={isFocusedMode} isMusicMode={isMusicMode}></Logo>
+          <Logo isFocusedMode={isFocusedMode}></Logo>
           <Suspense fallback={<div className="suspense-fallback" />}>
             {isWordGameMode && (
               <TypeBox
@@ -259,10 +248,8 @@ function App() {
               handleSoundTypeChange={handleSoundTypeChange}
               handleThemeChange={handleThemeChange}
               toggleFocusedMode={toggleFocusedMode}
-              toggleMusicMode={toggleMusicMode}
               toggleCoffeeMode={toggleCoffeeMode}
               isCoffeeMode={isCoffeeMode}
-              isMusicMode={isMusicMode}
               isUltraZenMode={isUltraZenMode}
               isFocusedMode={isFocusedMode}
               gameMode={gameMode}
@@ -273,13 +260,6 @@ function App() {
               toggleWordsCardMode={toggleWordsCardMode}
             ></FooterMenu>
           </div>
-          <Suspense fallback={null}>
-            <MusicPlayerSnackbar
-              isMusicMode={isMusicMode}
-              isFocusedMode={isFocusedMode}
-              onMouseLeave={() => focusTextInput()}
-            ></MusicPlayerSnackbar>
-          </Suspense>
         </div>
       </MotionConfig>
     </ThemeProvider>

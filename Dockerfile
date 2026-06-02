@@ -1,6 +1,6 @@
 FROM node
 
-WORKDIR /eletypes_react
+WORKDIR /typing_test_react
 
 COPY package*.json ./ 
 

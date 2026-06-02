@@ -1,9 +1,9 @@
 services:
-  eletypes-react:
+  typing-test-react:
     build:
       context: .
       dockerfile: Dockerfile
-    image: eletypes_react
+    image: typing_test_react
     ports:
       - "3000:3000"
-    container_name: eletypes_react
+    container_name: typing_test_react

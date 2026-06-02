@@ -13,7 +13,7 @@ const Logo = ({ isFocusedMode }) => {
       animate="show"
     >
       <h1>
-        Ele Types <KeyboardAltIcon fontSize="large" />
+        Typing Test <KeyboardAltIcon fontSize="large" />
       </h1>
       <span className="sub-header">
         an elegant typing experience, just start typing
